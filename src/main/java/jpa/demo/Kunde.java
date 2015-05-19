@@ -42,4 +42,14 @@ public class Kunde
     {
         this.title = title;
     }
+
+    @Override
+    public String toString()
+    {
+        return "Kunde{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", title='" + title + '\'' +
+                '}';
+    }
 }

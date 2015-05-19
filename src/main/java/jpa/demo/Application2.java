@@ -14,10 +14,34 @@ public class Application2
 
     private EntityManager em;
 
+    private KundeDao kundeDao;
+
     public Application2()
     {
         emf = Persistence.createEntityManagerFactory("jpa");
         openEM();
+    }
+
+
+    public static void main(String[] args)
+    {
+        Application2 app = new Application2();
+        app.doPersistAndFind();
+        app.close();
+    }
+
+    private void doPersistAndFind()
+    {
+        Kunde k = new Kunde();
+        k.setId(1L);
+        k.setName("Ingo Düppe");
+        kundeDao.persist(k);
+
+        refreshEM();
+
+        Kunde found = kundeDao.find(1L);
+        System.out.println("Kunde "+found);
+
     }
 
     public void refreshEM() {
@@ -28,6 +52,7 @@ public class Application2
     public void openEM()
     {
         em = emf.createEntityManager();
+        kundeDao = new KundeDao(em);
     }
 
     public void close() {
@@ -50,8 +75,4 @@ public class Application2
         }
     }
 
-    public static void main(String[] args)
-    {
-
-    }
 }
