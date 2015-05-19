@@ -69,7 +69,7 @@
                         </goals>
                         <phase>package</phase>
                         <configuration>
-                            <outputDirectory>${project.build.directory}/libs</outputDirectory>
+                            <outputDirectory>${project.basedir}/libs</outputDirectory>
                         </configuration>
                     </execution>
                     <execution>
@@ -82,7 +82,7 @@
                         <configuration>
                             <classifier>sources</classifier>
                             <failOnMissingClassifierArtifact>false</failOnMissingClassifierArtifact>
-                            <outputDirectory>${project.build.directory}/libs/sources</outputDirectory>
+                            <outputDirectory>${project.basedir}/libs/sources</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
