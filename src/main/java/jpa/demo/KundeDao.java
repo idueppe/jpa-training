@@ -1,6 +1,8 @@
 package jpa.demo;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import java.util.List;
 
 public class KundeDao
 {
@@ -15,6 +17,10 @@ public class KundeDao
         return em.find(Kunde.class, id);
     }
 
+    public Kunde reference(Long id) {
+        return em.getReference(Kunde.class, id);
+    }
+
     public void persist(Kunde kunde) {
         em.persist(kunde);
     }
@@ -25,5 +31,16 @@ public class KundeDao
 
     public Kunde update(Kunde kunde) {
         return em.merge(kunde);
+    }
+
+    public List<Kunde> findAll() {
+        TypedQuery<Kunde> query = em.createQuery("SELECT k FROM Kunde k", Kunde.class);
+        return query.getResultList();
+    }
+
+    public Kunde findByEmail(String email) {
+        TypedQuery<Kunde> query = em.createQuery("SELECT k FROM Kunde k WHERE k.email = :email", Kunde.class);
+        query.setParameter("email", email);
+        return query.getSingleResult();
     }
 }

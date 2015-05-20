@@ -1,9 +1,10 @@
 package jpa.demo;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
+@Table(name = "KundeA")
+@SecondaryTable(name = "KundeB")
 public class Kunde
 {
     @Id
@@ -12,6 +13,25 @@ public class Kunde
     private String name;
 
     private String title;
+
+    @Column(table = "KundeB", unique = true)
+    private String email;
+
+    @Embedded
+    private Address address;
+
+    @Version
+    private Long version;
+
+    public Address getAddress()
+    {
+        return address;
+    }
+
+    public void setAddress(Address address)
+    {
+        this.address = address;
+    }
 
     public Long getId()
     {
@@ -43,6 +63,16 @@ public class Kunde
         this.title = title;
     }
 
+    public String getEmail()
+    {
+        return email;
+    }
+
+    public void setEmail(String email)
+    {
+        this.email = email;
+    }
+
     @Override
     public String toString()
     {
@@ -50,6 +80,9 @@ public class Kunde
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", title='" + title + '\'' +
+                ", email='" + email + '\'' +
+                ", address=" + address +
+                ", version=" + version +
                 '}';
     }
 }

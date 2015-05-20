@@ -18,16 +18,17 @@ public class Application
         // EntityManager sind nicht ThreadSafe
         EntityManager em = emf.createEntityManager();
 
+        em.getTransaction().begin();
 
         Kunde kunde = new Kunde();
         kunde.setId(1L);
         kunde.setName("Ingo");
         // Transaktion starten
-        em.getTransaction().begin();
 
         em.persist(kunde);
 
         kunde.setTitle("none");
+
 
         // Transaktion commiten
         em.getTransaction().commit();
