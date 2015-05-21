@@ -10,7 +10,8 @@ import java.util.List;
 public class ScrumrApplication
 {
 
-    public static void main(String... args) {
+    public static void main(String... args) throws UserNotFoundException
+    {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("jpa");
         EntityManager em = emf.createEntityManager();
 
@@ -72,6 +73,11 @@ public class ScrumrApplication
 //                System.out.println(bug.getBugReport());
 //            }
         }
+
+        UserDao dao = new UserDao(em);
+        User productOwner = dao.findByEmail("productowner@jpa.scrumr");
+        System.out.println(productOwner);
+
 
         em.close();
         emf.close();
