@@ -1,8 +1,7 @@
-package jpa.demo.ids;
+package jpa.samples.embeddedId;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.IdClass;
 
 @Entity
 public class Vehicle
@@ -12,7 +11,6 @@ public class Vehicle
     private VehicleId vehicleId;
 
     private String model;
-
 
     public String getModel()
     {
@@ -33,6 +31,19 @@ public class Vehicle
     {
         this.vehicleId = vehicleId;
     }
+
+    public Vehicle withVehicleId(final VehicleId vehicleId)
+    {
+        this.vehicleId = vehicleId;
+        return this;
+    }
+
+    public Vehicle withModel(final String model)
+    {
+        this.model = model;
+        return this;
+    }
+
 
     @Override
     public String toString()

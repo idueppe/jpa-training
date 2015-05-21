@@ -1,8 +1,4 @@
-package jpa.demo;
-
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+package jpa.samples;
 
 /**
  * Created by idueppe on 20.05.15.

@@ -1,6 +1,4 @@
-package jpa.demo;
-
-import org.hibernate.annotations.ColumnDefault;
+package jpa.samples;
 
 import javax.persistence.*;
 

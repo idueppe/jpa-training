@@ -1,7 +1,8 @@
-package scrumr;
+package jpa.scrumr.model;
+
+import jpa.scrumr.model.AbstractEntity;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name="account")

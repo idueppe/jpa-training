@@ -1,8 +1,6 @@
-package jpa.demo.ids;
+package jpa.samples.embeddedId;
 
 import javax.persistence.Embeddable;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import java.io.Serializable;
 
 @Embeddable
@@ -15,12 +13,6 @@ public class VehicleId implements Serializable
 
     public VehicleId()
     {
-    }
-
-    public VehicleId(Long serialId, String plateNumber)
-    {
-//        this.serialId = serialId;
-        this.plateNumber = plateNumber;
     }
 
     public Long getSerialId()
@@ -42,6 +34,19 @@ public class VehicleId implements Serializable
     {
         this.plateNumber = plateNumber;
     }
+
+    public VehicleId withSerialId(final Long serialId)
+    {
+        this.serialId = serialId;
+        return this;
+    }
+
+    public VehicleId withPlateNumber(final String plateNumber)
+    {
+        this.plateNumber = plateNumber;
+        return this;
+    }
+
 
     @Override
     public boolean equals(Object o)

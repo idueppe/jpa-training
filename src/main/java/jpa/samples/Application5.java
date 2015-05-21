@@ -1,7 +1,7 @@
-package jpa.demo;
+package jpa.samples;
 
-import jpa.demo.ids.Vehicle;
-import jpa.demo.ids.VehicleId;
+import jpa.samples.embeddedId.Vehicle;
+import jpa.samples.embeddedId.VehicleId;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -22,7 +22,7 @@ public class Application5
 
         em.getTransaction().begin();
 
-        VehicleId id = new VehicleId(1l,"MS");
+        VehicleId id = new VehicleId().withSerialId(1l).withPlateNumber("MS");
 
         Vehicle vehicle = new Vehicle();
         vehicle.setVehicleId(id);

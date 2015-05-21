@@ -1,4 +1,4 @@
-package jpa.demo;
+package jpa.samples;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
