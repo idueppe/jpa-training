@@ -3,26 +3,35 @@ package jpa.scrumr.model;
 import javax.persistence.*;
 
 @Entity
-@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Inheritance(strategy = InheritanceType.JOINED)
+//@DiscriminatorColumn(discriminatorType = DiscriminatorType.CHAR)
+//@DiscriminatorValue(value = "T")
 public class Task extends AbstractEntity
 {
 
     private String name;
     private String description;
     private Double estimation;
+
+    @Basic(fetch = FetchType.LAZY)
     private Double remaining;
 
     @Enumerated(EnumType.STRING)
     private TaskState state;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private BacklogItem backlogItem;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private User assignedTo;
 
     @ManyToOne
     private BacklogItem item;
+
+
+    public void accept(TaskVisitor visitor) {
+        visitor.visit(this);
+    }
 
     public String getName()
     {

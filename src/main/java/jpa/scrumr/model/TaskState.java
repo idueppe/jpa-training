@@ -3,10 +3,17 @@ package jpa.scrumr.model;
 public enum TaskState
 {
 
-    TODO,
-    IN_PROGRESS,
-    BLOCKED,
-    REVIEW,
-    DONE;
+    TODO(1),
+    IN_PROGRESS(2),
+    BLOCKED(3),
+    REVIEW(4),
+    DONE(5);
+
+    private int dbKey;
+
+    private TaskState(int dbKey) {
+        this.dbKey = dbKey;
+    }
 
 }
+

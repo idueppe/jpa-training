@@ -5,6 +5,7 @@ import jpa.scrumr.model.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import java.util.List;
 
 public class ScrumrApplication
 {
@@ -28,6 +29,11 @@ public class ScrumrApplication
                                                 .withState(TaskState.TODO)
                                                 .withAssignTo(user)
                                 )
+                                .addTasks(new Bug()
+                                        .withBugReport("Exception xyz...")
+                                        .withAssignTo(user)
+                                        .withName("Fehler im QL")
+                                        .withState(TaskState.TODO))
                 );
 
         em.getTransaction().begin();
@@ -51,10 +57,51 @@ public class ScrumrApplication
 
         em.getTransaction().commit();
 
+        em.clear();
+
+        List<Task> tasks = em.createQuery("SELECT t FROM Task t",Task.class).getResultList();
+
+
+        TaskVisitor visitor = new ReportTaskVisitor();
+
+        for(Task task : tasks) {
+            System.out.println("Task "+task.getClass()+" :"+ task);
+            task.accept(visitor);
+//            if (task instanceof Bug) {
+//                Bug bug = (Bug) task;
+//                System.out.println(bug.getBugReport());
+//            }
+        }
+
         em.close();
         emf.close();
     }
 
+    public static class ReportTaskVisitor implements TaskVisitor {
 
+        @Override
+        public void visit(Task task)
+        {
+            System.out.println("Task"+task);
+        }
+
+        @Override
+        public void visit(Issue issue)
+        {
+            System.out.println("Issue"+issue);
+        }
+
+        @Override
+        public void visit(CompositeTask task)
+        {
+            System.out.println("CompositeTask"+task);
+        }
+
+        @Override
+        public void visit(Bug bug)
+        {
+            System.out.println("Bug "+bug);
+        }
+    }
 
 }
